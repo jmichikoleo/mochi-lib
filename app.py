@@ -21,7 +21,6 @@ def upload():
     file = request.files['file']
 
     if file:
-        # 🔥 IMPORTANT: clean filename
         filename = secure_filename(file.filename)
 
         filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
@@ -35,7 +34,6 @@ def read(filename):
     return render_template("reader.html", filename=filename)
 
 
-# 🔥 THIS FIXES YOUR 404
 @app.route('/uploads/<path:filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
